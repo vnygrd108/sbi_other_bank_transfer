@@ -1,93 +1,175 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SBI to Other Bank Transfer</title>
-    <style>
-        /* Import Google Font */
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+  <meta charset="utf-8">
+  <title>SBI to Other Bank Transfer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #6a1b9a, #ab47bc);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+    .container {
+      background-color: white;
+      color: #333;
+      max-width: 700px;
+      width: 100%;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
 
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: #f4f4f4;
-        }
+    h1 {
+      text-align: center;
+      color: #6a1b9a;
+      margin-bottom: 30px;
+    }
 
-        .container {
-            background: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-        }
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: bold;
+      color: #6a1b9a;
+    }
 
-        h2 {
-            margin-bottom: 20px;
-            color: #333;
-        }
+    input[type="text"],
+    input[type="file"],
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid #d1c4e9;
+      border-radius: 8px;
+      font-size: 14px;
+    }
 
-        label {
-            font-weight: 600;
-            display: block;
-            margin: 10px 0 5px;
-            text-align: left;
-        }
+    input[type="submit"] {
+      margin-top: 20px;
+      width: 100%;
+      background-color: #6a1b9a;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
 
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            outline: none;
-            font-size: 16px;
-        }
+    input[type="submit"]:hover {
+      background-color: #8e24aa;
+    }
 
-        input[type="file"] {
-            padding: 5px;
-        }
+    .error {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #f44336;
+      color: white;
+      border-radius: 8px;
+    }
 
-        button {
-            width: 100%;
-            padding: 12px;
-            background: #007BFF;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            font-size: 18px;
-            cursor: pointer;
-            transition: background 0.3s ease-in-out;
-        }
+    .account-footer {
+      margin-top: 40px;
+      border-top: 2px solid #eee;
+      padding-top: 25px;
+    }
 
-        button:hover {
-            background: #0056b3;
-        }
-    </style>
+    .account-footer h3 {
+      color: #6a1b9a;
+      margin-bottom: 15px;
+    }
+
+    .account-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    .account-table th,
+    .account-table td {
+      padding: 12px 16px;
+      text-align: left;
+    }
+
+    .account-table th {
+      background-color: #6a1b9a;
+      color: white;
+    }
+
+    .account-table tr:nth-child(even) {
+      background-color: #f3e5f5;
+    }
+
+    .account-table tr:hover {
+      background-color: #e1bee7;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px;
+      }
+
+      .account-table th,
+      .account-table td {
+        padding: 10px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h2>SBI To Other Banks Transfer</h2>
-        <form action="/" method="post" enctype="multipart/form-data">
-            <label for="file">Choose Excel File:</label>
-            <input type="file" name="file" required>
+  <div class="container">
+    <h1>SBI to Other Bank NEFT Sheet</h1>
 
-            <label for="start_serial">Starting Serial Number:</label>
-            <input type="number" name="start_serial" required>
+    <form method="POST" enctype="multipart/form-data">
+      <label for="file">Upload Excel file:</label>
+      <input type="file" name="file" required>
 
-            <button type="submit">Upload & Process</button>
-        </form>
+      <label for="start_serial">Start Serial Number:</label>
+      <input type="number" name="start_serial" required>
+
+      <label for="account_input">Enter Account Number:</label>
+      <input type="text" name="account_input" required>
+
+      <input type="submit" value="Process and Download">
+    </form>
+
+    {% if error %}
+      <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <div class="account-footer">
+      <h3>Allowed Account Numbers</h3>
+      <table class="account-table">
+        <thead>
+          <tr>
+            <th>Account Name</th>
+            <th>Account Number</th>
+            <th>IFSC Code</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for acc_no, details in account_map.items() %}
+          <tr>
+            <td>{{ details.name }}</td>
+            <td>{{ acc_no }}</td>
+            <td>{{ details.ifsc }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
+  </div>
 </body>
 </html>
