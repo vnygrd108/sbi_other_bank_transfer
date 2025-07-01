@@ -12,10 +12,10 @@ if not os.path.exists(UPLOAD_FOLDER):
 
 # Predefined account number mapping with name and IFSC code
 ACCOUNT_MAP = {
-    "43557115725": {"name": "SBI Saksham", "ifsc": "SBIN0007773"},
-    "41256726637": {"name": "SBI Gram Seva", "ifsc": "SBIN0007773"},
-    "34889306900": {"name": "SCHCT Gorhe", "ifsc": "SBIN0007773"},
-    "40237416058": {"name": "SBI Wadi", "ifsc": "SBIN0005800"}
+    "43557115725": {"name": "SBI SCHCT", "ifsc": "07773"},
+    "41256726637": {"name": "SBI SCHCT", "ifsc": "07773"},
+    "34889306900": {"name": "SCHCT Gorhe", "ifsc": "07773"},
+    "40237416058": {"name": "SBI SCHCT", "ifsc": "05800"}
 }
 
 @app.route("/", methods=["GET", "POST"])
